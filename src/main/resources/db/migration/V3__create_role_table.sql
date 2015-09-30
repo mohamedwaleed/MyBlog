@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS `role` (
+`id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+ALTER TABLE `role`
+ ADD PRIMARY KEY (`id`);
