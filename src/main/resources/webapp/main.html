@@ -25,6 +25,12 @@
                 <li>
                     <a href="#">Contact</a>
                 </li>
+                <li ui-sref="login" ng-show="loggedInUser===null || loggedInUser===undefined">
+                    <a href="#">login</a>
+                </li>
+                <li ng-click="logout()" ng-show="loggedInUser!==null && loggedInUser!==undefined">
+                    <a href="#">logout</a>
+                </li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->

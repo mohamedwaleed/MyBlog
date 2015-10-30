@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void config(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(localDatabaseAuthenticationProvider);
-//        auth.inMemoryAuthentication().withUser("user").password("1111").roles("ADMIN").and()
+//        auth.inMemoryAuthentication().withUser("mohamed_waleed").password("123").roles("ADMIN","USER").and()
 //                .withUser("user2").password("1111").roles("ADMIN");
     }
 
