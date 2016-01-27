@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', '$http',
-    function($scope,   $translate,   $localStorage,   $window, $http) {
+  .controller('AppCtrl', ['$scope', '$window', '$http',
+    function($scope, $window, $http) {
 
 
 

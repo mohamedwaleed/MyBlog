@@ -7,7 +7,6 @@ app.controller('MainController' , ['$scope','$rootScope','AuthService','$state',
 
       $scope.logout = function(){
          AuthService.logout();
-         //$window.location.reload();
       };
 
  }]);

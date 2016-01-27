@@ -2,8 +2,8 @@
 
 
 angular.module('app')
- .factory('AuthService',['$rootScope','$http','$log','$cookieStore','$state','$window','Session',
-    function($rootScope,$http,$log,$cookieStore,$state,$window,Session){
+ .factory('AuthService',['$rootScope','$http','$log','$cookies','$state','$window','Session',
+    function($rootScope,$http,$log,$cookies,$state,$window,Session){
         var onAuthSuccess = function(rememberMe){
 
              var request = {
@@ -68,7 +68,7 @@ angular.module('app')
             },
             isAuthenticated: function(){
 
-                return ($cookieStore.get('loggedInUser') !== undefined) || ($window.sessionStorage["loggedInUser"] !== null)  || ($rootScope.loggedInUser !== null);
+                return ($cookies.get('loggedInUser') !== undefined) || ($window.sessionStorage["loggedInUser"] !== null)  || ($rootScope.loggedInUser !== null);
             }
 
         };

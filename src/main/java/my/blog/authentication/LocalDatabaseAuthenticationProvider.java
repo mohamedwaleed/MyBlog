@@ -3,6 +3,7 @@ package my.blog.authentication;
 import my.blog.authentication.Services.UserService;
 import my.blog.authentication.repository.UserRepository;
 import my.blog.entities.User;
+import my.blog.utilities.CredentialsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -14,6 +15,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
+import java.time.Clock;
 import java.util.Collection;
 import java.util.List;
 
@@ -26,6 +28,9 @@ public class LocalDatabaseAuthenticationProvider implements AuthenticationProvid
     @Autowired
     UserService userService;
 
+    @Autowired
+    private CredentialsUtils credentialsUtils;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
@@ -37,10 +42,9 @@ public class LocalDatabaseAuthenticationProvider implements AuthenticationProvid
             throw new BadCredentialsException("Username not exists");
         }
 
-        if(!user.getPassword().equals(password)){
+        if(!credentialsUtils.isSamePassword(user.getPassword(),password)){
             throw new BadCredentialsException("Wrong password");
         }
-
         Collection<? extends GrantedAuthority> authorities = user.getAuthorities();
 
         return new UsernamePasswordAuthenticationToken(user,password,authorities);
