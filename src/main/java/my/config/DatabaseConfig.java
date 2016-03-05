@@ -5,6 +5,9 @@ import com.mchange.v2.c3p0.PooledDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
 
@@ -75,5 +78,14 @@ public class DatabaseConfig {
         ds.setTestConnectionOnCheckout(testConnectionOnCheckout);
 
         return ds;
+    }
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
+        hibernateJpaVendorAdapter.setShowSql(showSql);
+        hibernateJpaVendorAdapter.setGenerateDdl(false);
+        hibernateJpaVendorAdapter.setDatabase(Database.MYSQL);
+        return hibernateJpaVendorAdapter;
     }
 }

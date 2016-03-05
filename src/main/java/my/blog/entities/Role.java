@@ -1,6 +1,5 @@
 package my.blog.entities;
 
-import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -9,7 +8,6 @@ import javax.persistence.*;
  * Created by mohamed on 31/08/15.
  */
 @Entity
-@Data
 @Table(name = "role")
 public class Role implements GrantedAuthority{
     @Id
@@ -20,5 +18,17 @@ public class Role implements GrantedAuthority{
     @Override
     public String getAuthority() {
         return name;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

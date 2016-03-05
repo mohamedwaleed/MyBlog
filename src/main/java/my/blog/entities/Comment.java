@@ -1,7 +1,5 @@
 package my.blog.entities;
 
-import lombok.Data;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +9,6 @@ import java.util.List;
  */
 @Entity
 @Table(name = "comment")
-@Data
 public class Comment {
     @Id
     @GeneratedValue
@@ -22,7 +19,47 @@ public class Comment {
     private String content;
     @Column
     private String author;
-    @OneToMany(cascade = CascadeType.REMOVE)
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinColumn(name = "comment_id")
     private List<Reply> replyList;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<Reply> getReplyList() {
+        return replyList;
+    }
+
+    public void setReplyList(List<Reply> replyList) {
+        this.replyList = replyList;
+    }
 }

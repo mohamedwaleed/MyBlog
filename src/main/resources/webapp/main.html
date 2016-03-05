@@ -28,7 +28,7 @@
                 <li ui-sref="login" ng-show="loggedInUser===null || loggedInUser===undefined">
                     <a href="#">login</a>
                 </li>
-                <li ui-sref="adminPanel" ng-show="loggedInUser!==null && loggedInUser!==undefined && isAdmin === true">
+                <li ui-sref="adminPanelAuth" ng-show="loggedInUser!==null && loggedInUser!==undefined && isAdmin === true">
                     <a href="#">admin panel</a>
                 </li>
                 <li ng-click="logout()" ng-show="loggedInUser!==null && loggedInUser!==undefined">
@@ -42,9 +42,100 @@
 </nav>
 
         <div style="margin-bottom: 72px;"></div>
+
+
+
+<!-- Page Content -->
+<div class="container">
+
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+
+
         <div ui-view></div>
 
 
+        <!-- Blog Sidebar Widgets Column -->
+        <div class="col-md-4">
+
+            <!-- Blog Search Well -->
+            <div class="well">
+                <h4>Blog Search</h4>
+                <div class="input-group">
+                    <input type="text" class="form-control">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                </div>
+                <!-- /.input-group -->
+            </div>
+
+            <!-- Blog Categories Well -->
+            <div class="well">
+                <h4>Blog Archive</h4>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="(key,value) in postsByYears" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="">{{key}}({{value.length}})
+                                    <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li ng-repeat="post in value">
+                                        <a href="#/post/{{post.id}}" >{{post.title}}</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                       </ul>
+                    </div>
+                    <!-- /.col-lg-6 -->
+                    <!--<div class="col-lg-6">-->
+                        <!--<ul class="list-unstyled">-->
+                            <!--<li><a href="#">Category Name</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#">Category Name</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#">Category Name</a>-->
+                            <!--</li>-->
+                            <!--<li><a href="#">Category Name</a>-->
+                            <!--</li>-->
+                        <!--</ul>-->
+                    <!--</div>-->
+                    <!-- /.col-lg-6 -->
+                </div>
+                <!-- /.row -->
+            </div>
+
+            <!-- Side Widget Well -->
+            <div class="well">
+                <div  style="text-align: center">
+                    <h3>Follow Me</h3>
+
+                    <a href="https://twitter.com/mohamedwaleed15" target="_blank" style="margin-right: 10px;" class="btn btn-social-icon btn-twitter">
+                        <span class="fa fa-twitter"></span>
+                    </a>
+                    <a href="https://www.facebook.com/mohamed.waleed.96780" target="_blank"style="margin-right: 10px;" class="btn btn-social-icon btn-facebook">
+                        <span class="fa fa-facebook"></span>
+                    </a>
+                    <a href="https://plus.google.com/u/0/106687021053948524027/posts/p/pub" target="_blank" style="margin-right: 10px;" class="btn btn-social-icon btn-google">
+                        <span class="fa fa-google"></span>
+                    </a>
+                    <a href="https://github.com/mohamedwaleed" target="_blank" style="margin-right: 10px;" class="btn btn-social-icon btn-github">
+                        <span class="fa fa-github"></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <!-- /.row -->
+</div>
 
 </div>
 <!-- /.container -->

@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="auth/css/login.css" type="text/css"/>
+<!--
+    you can substitue the span of reauth email for a input with the email and
+    include the remember me checkbox
+    -->
+<!--<div class="container">-->
+<!--<div class="card card-container">-->
+<!--&lt;!&ndash; <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> &ndash;&gt;-->
+<!--<img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />-->
+<!--<p id="profile-name" class="profile-name-card"></p>-->
+<!--<form class="form-signin" ng-submit="login()" novalidate>-->
+<!--<span id="reauth-email" class="reauth-email"></span>-->
+<!--<input ng-model="user.username" type="text" id="inputEmail" class="form-control" placeholder="Email address" required>-->
+<!--<input ng-model="user.password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>-->
+<!--<div id="remember" class="checkbox">-->
+<!--<label>-->
+<!--<input ng-model="user.remember" type="checkbox" value="remember-me"> Remember me-->
+<!--</label>-->
+<!--</div>-->
+<!--<button class="btn btn-lg btn-primary btn-block btn-signin" type="submit">Sign in</button>-->
+<!--</form>&lt;!&ndash; /form &ndash;&gt;-->
+<!--<a href="#" class="forgot-password">-->
+<!--Forgot the password?-->
+<!--</a>-->
+<!--</div>&lt;!&ndash; /card-container &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /container &ndash;&gt;-->
+
+
+<div class="wrapper">
+    <div class="container">
+
+        <!--<form class="form">-->
+        <!--<input type="text" placeholder="Username">-->
+        <!--<input type="password" placeholder="Password">-->
+        <!--<button type="submit" id="login-button">Login</button>-->
+        <!--</form>-->
+
+        <form class="form" ng-submit="authenticateAdminPanel()" novalidate>
+            <input class="box" ng-model="user.username" type="text" id="inputEmail"  placeholder="Username" required>
+            <input class="box" ng-model="user.password" type="password" id="inputPassword"  placeholder="Password" required>
+            <button type="submit" id="login-button">Login</button>
+        </form>
+    </div>
+
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+

@@ -1,23 +1,18 @@
 package my.blog.authentication;
 
-import my.blog.authentication.Services.UserService;
-import my.blog.authentication.repository.UserRepository;
+import my.blog.authentication.services.UserService;
 import my.blog.entities.User;
 import my.blog.utilities.CredentialsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import java.time.Clock;
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by mohamed on 30/08/15.

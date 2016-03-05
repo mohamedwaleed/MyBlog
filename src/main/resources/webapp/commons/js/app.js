@@ -7,10 +7,16 @@
 var app = angular.module('app', [
         'ngCookies',
         'ui.router',
-        'uiRouterStyles'
+        'uiRouterStyles',
+        'ui.tinymce',
+        'ngResource',
+        'angularUtils.directives.dirPagination',
+        'ngSanitize',
+        'hm.readmore',
+        'ngAnimate'
 ]).run(
-    ['$rootScope', '$state', '$stateParams', '$location', '$window','$cookies','AuthService', 'Session','$log',
-        function ($rootScope, $state, $stateParams, $location, $window,$cookies,AuthService,Session,$log) {
+    ['$rootScope', '$state', '$stateParams', '$location', '$window','$cookies','AuthService', 'Session','$log','$http',
+        function ($rootScope, $state, $stateParams, $location, $window,$cookies,AuthService,Session,$log,$http) {
             $rootScope.$on('$stateChangeStart',
                 function (event, toState, toParams, fromState, fromParams) {
 
@@ -33,7 +39,11 @@ var app = angular.module('app', [
 
                     if(AuthService.isAuthorized(toState.authorizedRoles)){
                         if(AuthService.isAuthenticated()){
+                            console.log(toState.name.substr(0,10));
+                            console.log($rootScope.isAdminPanelAuthenticated);
                            if(toState.name === 'login'){
+                               $state.go('app.dashboard');
+                           }else if(toState.name.substr(0,10) === 'adminPanel' && ($rootScope.isAdminPanelAuthenticated == undefined || $rootScope.isAdminPanelAuthenticated === false) ){
                                $state.go('app.dashboard');
                            }
                         }
@@ -61,16 +71,53 @@ var app = angular.module('app', [
                    authorizedRoles: [ROLE.admin,ROLE.user,ROLE.guest]
                 }).state('app.dashboard', {
                    url: 'dashboard',
-                   templateUrl: 'dashboard.html',
+                   templateUrl: 'dashboard/html/dashboard.html',
+                   controller: 'mainDashboardCtrl',
                    authorizedRoles: [ROLE.admin,ROLE.user,ROLE.guest]
                 }).state('adminPanel', {
                    url: '/adminPanel',
                    templateUrl: 'admin/html/admin-panel.html',
+                   controller: 'adminPanelCtrl',
                    authorizedRoles: [ROLE.admin],
                    data: {
                        css: ['admin/css/sb-admin.css', 'admin/css/plugins/morris.css', 'admin/font-awesome/css/font-awesome.min.css']
                    }
-                });
+                }).state('adminPanelAuth', {
+                    url: '/admin-auth',
+                    templateUrl: 'admin/html/admin-auth.html',
+                    controller: 'admin-auth-controller',
+                    authorizedRoles: [ROLE.admin]
+                }).state('adminPanel.addPost', {
+                url: '/add-post',
+                templateUrl: 'admin/html/addPost.html',
+                controller: 'addPostCtrl',
+                authorizedRoles: [ROLE.admin]
+                 }).state('adminPanel.dashboard', {
+                        url: '/dashboard',
+                        templateUrl: 'admin/html/dashboard.html',
+                        controller: 'dashboardCtrl',
+                        authorizedRoles: [ROLE.admin]
+               }).state('adminPanel.managePosts', {
+                        url: '/manage-posts',
+                        templateUrl: 'admin/html/managePosts.html',
+                        controller: 'managePostsCtrl',
+                        authorizedRoles: [ROLE.admin]
+              }).state('adminPanel.editPost', {
+                        url: '/edit-post',
+                        templateUrl: 'admin/html/editPost.html',
+                        controller: 'editPostsCtrl',
+                        params: {
+                          post: null
+                        },
+                        authorizedRoles: [ROLE.admin]
+              }).state('app.post', {
+                        url: 'post/:postId',
+                        templateUrl: 'post/html/post.html',
+                        controller: 'postCtrl',
+                        authorizedRoles: [ROLE.admin,ROLE.user,ROLE.guest]
+                    });
+
+
 
         }
     ]

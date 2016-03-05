@@ -1,0 +1,59 @@
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    Manage Posts
+                </h1>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+
+            <div ng-show="page==undefined||page.totalElements==0">
+                <h3 style="text-align: center">No results</h3>
+            </div>
+            <div ng-show="page!=undefined&&page.totalElements!=0">
+                <table
+                        class="table table-striped m-b-none">
+                    <thead>
+                    <th>Post Id</th>
+                    <th>Post title</th>
+                    <th>Post Author</th>
+                    <th></th>
+                    <th></th>
+                    </thead>
+                    <tbody>
+                    <tr dir-paginate="post in page.pageContent | itemsPerPage: page.size" total-items="page.totalElements"
+                        current-page="currentPage">
+                        <td>{{post.id}}</td>
+
+                        <td>{{post.title}}</td>
+                        <td>{{post.author}}</td>
+                        <td>
+                            <a href="" ng-click="deletePost(post.id)">Delete</a>
+                        </td>
+                        <td>
+                            <a href="" ui-sref="adminPanel.editPost({post:post})">Edit</a>
+                        </td>
+                    </tr>
+
+
+                    </tbody>
+                </table>
+                <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"
+                                         template-url="vendor/dirPagination/dirPagination.tpl.html"></dir-pagination-controls>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->

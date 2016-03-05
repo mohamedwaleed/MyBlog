@@ -1,14 +1,14 @@
 package my.blog.authentication.controllers;
 
-import my.blog.authentication.Services.UserService;
+import my.blog.authentication.services.UserService;
+import my.blog.authentication.commands.AdminPanelCommand;
 import my.blog.entities.User;
+import my.blog.utilities.CredentialsUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by mohamed on 24/09/15.
@@ -20,6 +20,9 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CredentialsUtils credentialsUtils;
+
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping("/getLoggedInUser")
@@ -27,4 +30,20 @@ public class UserController {
         return userService.getLoggedInUser();
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/confirmAdminPanelPassword" , method = RequestMethod.POST)
+    public @ResponseBody
+    ResponseEntity<Boolean> confirmAdminPanelPassword(@RequestBody AdminPanelCommand adminPanelCommand){
+        String username = adminPanelCommand.getUsername();
+        String password = credentialsUtils.encodePassword(adminPanelCommand.getPassword());
+        User user = userService.loadUserByUsername(username);
+        if(user == null){
+            return new ResponseEntity<Boolean>(false,HttpStatus.FORBIDDEN);
+        }
+        if(!user.getPassword().equals(password)){
+            return new ResponseEntity<Boolean>(false,HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+    }
 }
