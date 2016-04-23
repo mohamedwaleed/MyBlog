@@ -13,7 +13,8 @@ var app = angular.module('app', [
         'angularUtils.directives.dirPagination',
         'ngSanitize',
         'hm.readmore',
-        'ngAnimate'
+        'ngAnimate',
+        'ui.bootstrap'
 ]).run(
     ['$rootScope', '$state', '$stateParams', '$location', '$window','$cookies','AuthService', 'Session','$log','$http',
         function ($rootScope, $state, $stateParams, $location, $window,$cookies,AuthService,Session,$log,$http) {
@@ -82,11 +83,6 @@ var app = angular.module('app', [
                    data: {
                        css: ['admin/css/sb-admin.css', 'admin/css/plugins/morris.css', 'admin/font-awesome/css/font-awesome.min.css']
                    }
-                }).state('adminPanelAuth', {
-                    url: '/admin-auth',
-                    templateUrl: 'admin/html/admin-auth.html',
-                    controller: 'admin-auth-controller',
-                    authorizedRoles: [ROLE.admin]
                 }).state('adminPanel.addPost', {
                 url: '/add-post',
                 templateUrl: 'admin/html/addPost.html',
@@ -115,7 +111,17 @@ var app = angular.module('app', [
                         templateUrl: 'post/html/post.html',
                         controller: 'postCtrl',
                         authorizedRoles: [ROLE.admin,ROLE.user,ROLE.guest]
-                    });
+              }).state('app.registration', {
+                        url: 'registration',
+                        templateUrl: 'registration/html/registration.html',
+                        controller: 'registrationCtrl',
+                        authorizedRoles: [ROLE.admin,ROLE.user,ROLE.guest]
+              }).state('app.about', {
+                        url: 'about',
+                        templateUrl: 'about/html/about.html',
+                        controller: 'aboutCtrl',
+                        authorizedRoles: [ROLE.admin,ROLE.user,ROLE.guest]
+              });
 
 
 

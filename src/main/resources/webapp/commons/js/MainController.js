@@ -2,8 +2,8 @@
 
 var app = angular.module('app');
 
-app.controller('MainController' , ['$scope','$rootScope','AuthService','$state','$window','PostModel',
- function($scope,$rootScope,AuthService,$state,$window,PostModel){
+app.controller('MainController' , ['$scope','$rootScope','AuthService','$state','$window','PostModel','$uibModal','$log',
+ function($scope,$rootScope,AuthService,$state,$window,PostModel,$uibModal,$log){
 
       $scope.logout = function(){
          AuthService.logout();
@@ -23,5 +23,23 @@ app.controller('MainController' , ['$scope','$rootScope','AuthService','$state',
          }
      };
      PostModel.listAllPosts(groupByYear);
+
+
+     $scope.items = ['item1', 'item2', 'item3'];
+
+      $scope.animationsEnabled = true;
+
+      $scope.open = function (size) {
+
+        var modalInstance = $uibModal.open({
+          animation: true,
+          templateUrl: 'contact/html/contact.html',
+          controller: 'contactCtrl',
+          size: size
+        });
+
+      };
+
+
 
  }]);

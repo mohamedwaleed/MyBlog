@@ -1,0 +1,19 @@
+<div class="col-md-8">
+
+    <h1 style="font-family: 'Pinyon Script', cursive;text-align:center; font-size:70px;">Registration</h1>
+    <hr>
+    <div class="input-group" style="margin:auto;" >
+        <form ng-submit="register()">
+
+                <input type="text" class="form-control" placeholder="Username" ng-model="username" required><br/><br/>
+                <input type="password" class="form-control" placeholder="Password" ng-model="password" required><br/><br/>
+                <input type="email" class="form-control" placeholder="Email" ng-model="email" required><br/><br/>
+                Gender : <input type="radio" name="gender" value="male" ng-model="gender"  > Male
+                <input type="radio" name="gender" value="female" ng-model="gender"> Female<br/><br/>
+
+                <input type="submit" style="text-align:center;" class="btn btn-success" placeholder="Username" value="register">
+
+        </form>
+    </div>
+    <br/>
+</div>

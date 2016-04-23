@@ -12,7 +12,9 @@ import java.util.SortedMap;
  */
 @Configuration
 @ComponentScan(basePackages = "my")
-@Import(value = {WebConfig.class,SecurityConfig.class,PersistenceConfig.class,FlywayConfig.class,PropertyConfig.class,BeanConfig.class,DatabaseConfig.class,DozerConfig.class})
+@Import(value = {WebConfig.class,SecurityConfig.class,PersistenceConfig.class,
+        FlywayConfig.class,PropertyConfig.class,BeanConfig.class,
+        DatabaseConfig.class,DozerConfig.class,MailConfig.class})
 public class MainConfig  {
 
 

@@ -1,5 +1,7 @@
 package my.blog.authentication.controllers;
 
+import my.blog.authentication.Dtos.UserDTO;
+import my.blog.authentication.commands.UserCommand;
 import my.blog.authentication.services.UserService;
 import my.blog.authentication.commands.AdminPanelCommand;
 import my.blog.entities.User;
@@ -23,7 +25,6 @@ public class UserController {
     @Autowired
     private CredentialsUtils credentialsUtils;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping("/getLoggedInUser")
     public User getLoggednUser(){
@@ -45,5 +46,16 @@ public class UserController {
             return new ResponseEntity<Boolean>(false,HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<Boolean>(true,HttpStatus.OK);
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public UserDTO createNewUser(@RequestBody UserCommand userCommand){
+        return userService.createNewUser(userCommand);
+    }
+
+    @PreAuthorize("hasRole('ROLE_USER')")
+    @RequestMapping(method = RequestMethod.GET)
+    public Boolean isUserExist(@RequestParam(value = "username") String username){
+        return userService.isUserExist(username);
     }
 }

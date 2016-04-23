@@ -4,12 +4,10 @@ import my.blog.comment.commands.CommentCommand;
 import my.blog.comment.services.CommentService;
 import my.blog.common.commands.PagedCommonResponse;
 import my.blog.entities.Comment;
-import my.blog.entities.Post;
 import my.blog.post.commands.PostCommand;
 import my.blog.post.dtos.PostDTO;
 import my.blog.post.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -102,6 +100,7 @@ public class PostController {
 
 
     @RequestMapping(value = "/{postId}/comment",method = RequestMethod.POST)
+    @PreAuthorize("hasRole('ROLE_USER')")
     public @ResponseBody ResponseEntity<List<Comment>> addComment(@PathVariable(value = "postId") Integer postId ,@RequestBody CommentCommand commentCommand){
         List<Comment> comments = commentService.addComment(commentCommand, postId);
         HttpStatus status = HttpStatus.OK;

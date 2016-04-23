@@ -18,36 +18,40 @@
 
 
     <!-- Comment -->
+    <div ng-show="loggedInUser!==null && loggedInUser!==undefined">
+        <div  ng-repeat="comment in post.commentList track by $index">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img class="media-object" src="commons/images/default.jpg.png" alt="" width="64" height="64">
+                </a>
+                <small ng-if="commentSubmisionError" style="color:red;">Error in submiting your comment</small>
 
-    <div ng-repeat="comment in post.commentList track by $index">
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img class="media-object" src="commons/images/default.jpg.png" alt="" width="64" height="64">
-            </a>
-            <small ng-if="commentSubmisionError" style="color:red;">Error in submiting your comment</small>
+                <div class="media-body">
+                    <h4 class="media-heading">{{comment.author}}
+                        <small>{{comment.date|date:'MMMM dd, yyyy'}} at {{comment.date|date:'hh:mm a'}}</small>
+                        <small><a ng-if="isAdmin" href="" ng-click="deleteComment(comment.id,$index)">Delete</a></small>
+                    </h4>
 
-            <div class="media-body">
-                <h4 class="media-heading">{{comment.author}}
-                    <small>{{comment.date|date:'MMMM dd, yyyy'}} at {{comment.date|date:'hh:mm a'}}</small>
-                    <small><a ng-if="isAdmin" href="" ng-click="deleteComment(comment.id,$index)">Delete</a></small>
-                </h4>
-
-                <div style="word-wrap: break-word;">
-                    {{comment.content}}
+                    <div style="word-wrap: break-word;">
+                        {{comment.content}}
+                    </div>
                 </div>
             </div>
+            <br>
         </div>
-        <br>
-    </div>
 
-    <hr>
-    <form role="form">
-        <div class="form-group">
-            <input type="text" class="form-control" ng-model="authorName" style="margin-bottom:5px;" placeholder="Name" required>
-            <textarea class="form-control" rows="3" ng-model="commentContent" placeholder="Write your comment..."></textarea required>
-        </div>
-        <button type="submit" class="btn btn-primary" ng-click = "addComment()">comment</button>
-        <img src="commons/images/loading.gif" ng-show="loading" width="40" height="40"/>
-    </form>
-    <hr>
+        <hr>
+        <form role="form">
+            <div class="form-group">
+                <input type="text" class="form-control" ng-model="authorName" style="margin-bottom:5px;" placeholder="Name" required>
+                <textarea class="form-control" rows="3" ng-model="commentContent" placeholder="Write your comment..."></textarea required>
+            </div>
+            <button type="submit" class="btn btn-primary" ng-click = "addComment()">comment</button>
+            <img src="commons/images/loading.gif" ng-show="loading" width="40" height="40"/>
+        </form>
+        <hr>
+    </div>
+    <div ng-show="loggedInUser ===null || loggedInUser===undefined">
+        Please <a ui-sref="app.registration" href="">register</a> or <a href="" ui-sref="login">login</a> to be able to comment
+    </div>
 </div>

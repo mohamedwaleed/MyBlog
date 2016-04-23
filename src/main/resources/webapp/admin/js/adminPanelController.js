@@ -7,6 +7,5 @@ angular.module('app')
         $scope.logoutFromAdminPanel = function(){
             $rootScope.isAdminPanelAuthenticated = false;
         };
-        $state.go('adminPanel');
 
     }]);

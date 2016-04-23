@@ -16,23 +16,23 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">about</a>
+                <li ui-sref="app.about">
+                    <a href="#">About Me</a>
                 </li>
-                <li>
-                    <a href="#">services</a>
-                </li>
-                <li>
-                    <a href="#">contact</a>
+                <!--<li>-->
+                    <!--<a href="#">Services</a>-->
+                <!--</li>-->
+                <li ng-click="open()">
+                    <a href="#">Contact</a>
                 </li>
                 <li ui-sref="login" ng-show="loggedInUser===null || loggedInUser===undefined">
-                    <a href="#">login</a>
+                    <a href="#">Login</a>
                 </li>
-                <li ui-sref="adminPanelAuth" ng-show="loggedInUser!==null && loggedInUser!==undefined && isAdmin === true">
-                    <a href="#">admin panel</a>
+                <li ui-sref="adminPanel" ng-show="loggedInUser!==null && loggedInUser!==undefined && isAdmin === true">
+                    <a href="#">Admin Panel</a>
                 </li>
                 <li ng-click="logout()" ng-show="loggedInUser!==null && loggedInUser!==undefined">
-                    <a href="#">logout</a>
+                    <a href="#">Logout</a>
                 </li>
             </ul>
         </div>
