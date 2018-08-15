@@ -6,21 +6,21 @@
         "type": "mongodb",
         "config": {
             "development": {
-                "connectionUrl": "mongodb://localhost:27017/blog?authSource=admin",
+                "connectionUrl": "mongodb://127.0.0.1:27017/blog?authSource=admin",
                 "username": "mohamed",
                 "password": "123456",
                 "poolSize": 10,
                 "reconnectInterval": 500
             },
             "production": {
-                "connectionUrl": "mongodb://localhost:27017/blog?authSource=admin",
+                "connectionUrl": "mongodb://127.0.0.1:27017/blog?authSource=admin",
                 "username": "mohamed",
                 "password": "123456",
                 "poolSize": 10,
                 "reconnectInterval": 500
             },
             "test": {
-                "connectionUrl": "mongodb://localhost:27017/blog?authSource=admin",
+                "connectionUrl": "mongodb://127.0.0.1:27017/blog?authSource=admin",
                 "username": "mohamed",
                 "password": "123456",
                 "poolSize": 10,
